@@ -46,3 +46,19 @@ def atualizar_idade(id_aluno, nova_idade):
 # id = int(input("Digite o id do aluno que deseja atualizar idade: "))
 # idade = int(input("Digite a nova idade: "))
 # atualizar_idade(id, idade)
+
+def deletar_aluno(id_aluno):
+    conexao, cursor = conectar()
+    if conexao:
+        try:
+            cursor.execute(
+                "DELETE FROM alunos WHERE id = %s",
+                (id_aluno,)
+                )
+            conexao.commit()
+        except Exception as erro:
+            print(f"Erro ao tentar deletar aluno: {erro}")
+        finally:
+            cursor.close()
+            conexao.close()
+
