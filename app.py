@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from crud import criar_aluno, atualizar_idade, listar_alunos, deletar_aluno
 
 st.set_page_config(page_title="Gerenciamento de Alunos", page_icon="👨‍🎓")
@@ -25,7 +26,9 @@ elif menu == "Listar":
     st.subheader("Listar Alunos")
     alunos = listar_alunos()
     if alunos:
-       st.dataframe(alunos)
+        colunas = ["ID", "Nome", "Idade"]
+        df = pd.DataFrame(alunos, columns=colunas)
+        st.dataframe(df)
     else:
         st.info("Nenhum Aluno Encontrado!")
 
