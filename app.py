@@ -25,7 +25,6 @@ elif menu == "Listar":
     st.subheader("Listar Alunos")
     alunos = listar_alunos()
     if alunos:
-       alunos = alunos.rename(columns={"id": "ID","nome": "NOME","idade": "IDADE"})
        st.dataframe(alunos)
     else:
         st.info("Nenhum Aluno Encontrado!")
