@@ -25,8 +25,8 @@ elif menu == "Listar":
     st.subheader("Listar Alunos")
     alunos = listar_alunos()
     if alunos:
+       alunos = alunos.rename(columns={"id": "ID","nome": "NOME","idade": "IDADE"})
        st.dataframe(alunos)
-       alunos = alunos.rename(columns={"id":"ID","nome": "NOME","idade": "IDADE"})
     else:
         st.info("Nenhum Aluno Encontrado!")
 
@@ -43,3 +43,14 @@ elif menu == "Atualizar":
     else:
         st.info("Nenhum aluno disponível para atualizar")
 
+#Deletar alunos
+elif menu == "Deletar":
+    st.subheader("❌ Deletar Alunos")
+    alunos = listar_alunos()
+    if alunos:
+        id_aluno = st.selectbox("Escolha o ID do Aluno para Deletar:", [linha[0] for linha in alunos])
+        if st.button("Deletar"):
+            deletar_aluno(id_aluno)
+            st.success("Aluno Removido com sucesso!")
+    else:
+        st.info("Nenhum, aluno disponível para deletar.")
